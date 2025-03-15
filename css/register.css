@@ -1,0 +1,74 @@
+body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: auto;
+            /* Ajusta la altura automáticamente */
+            overflow-x: hidden;
+            /* Evita el desplazamiento horizontal */
+        }
+
+        body {
+            background-image: url('https://i.postimg.cc/jS5fBjYG/776e4103-dcd6-40ba-a467-c347050d4e74-1.webp');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            /* La imagen de fondo se fija */
+        }
+
+        .container {
+            padding: 20px;
+            margin-top: 50px;
+            /* Asegúrate de que hay espacio suficiente en la parte superior */
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            min-height: 100vh;
+            /* Mínimo altura de la ventana del navegador */
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 10px;
+        }
+
+        .card-header,
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-header {
+            background: linear-gradient(45deg, #007bff, #6610f2);
+            color: white;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            border-radius: 20px;
+            /* Bordes redondeados para los botones */
+        }
+
+        .btn-primary:hover {    
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background-color: #545b62;
+            border-color: #4e555b;
+        }
+
+        h1 {
+            font-weight: 300;
+        }
+
+        .form-control {
+            border-radius: 20px;
+        }
