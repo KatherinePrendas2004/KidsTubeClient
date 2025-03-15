@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videos Disponibles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link href="css/mostraVideo.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+    <img src="https://i.postimg.cc/3dTx89bS/image.png" alt="Decorative Image" style="position: fixed; top: 10px; left: 10px; width: 80px;">
+
+    <h1>Videos Disponibles</h1>
+    <div id="videosList" class="videos-list">
+        <!-- Videos will be loaded here -->
+    </div>
+
+    <div class="salir-btn-container">
+        <button type="button" id="salirBtn" onclick="salir()">Salir</button>
+    </div>
+
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <iframe id="modalIframe" width="100%" height="500px" src="" frameborder="0" allow ="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script src="js/mostrarVideos.js"></script>
+</body>
+</html>

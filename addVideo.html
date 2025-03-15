@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Videos</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <img src="https://i.postimg.cc/3dTx89bS/image.png" alt="Decorative Image" style="position: fixed; top: 0; right: 0; width: 100px; z-index: 1;">
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">Gestión de Videos</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="redirectaddUser()">Añadir Usuarios <span
+              class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="#" onclick="redirectaddVideo()">Añadir Vídeos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="salir()">Salir</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container mt-5">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>URL</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="lista-videos"></tbody>
+    </table>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#agregarVideoModal">Agregar
+      Video</button>
+  </div>
+
+  <!-- Modal de edición -->
+  <div class="modal fade" id="editarVideoModal" tabindex="-1" aria-labelledby="editarVideoModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editarVideoModalLabel">Editar Video</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="form-editar">
+            <div class="form-group">
+              <label for="editNombre">Nombre del Video:</label>
+              <input type="text" class="form-control" id="editNombre" required>
+            </div>
+            <div class="form-group">
+              <label for="editUrl">URL del Video:</label>
+              <input type="url" class="form-control" id="editUrl" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" onclick="guardarCambios()">Guardar Cambios</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de agregar -->
+  <div class="modal fade" id="agregarVideoModal" tabindex="-1" aria-labelledby="agregarVideoModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="agregarVideoModalLabel">Agregar Video</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="form-agregar">
+            <div class="form-group">
+              <label for="nombre">Nombre del Video:</label>
+              <input type="text" class="form-control" id="nombre" required>
+            </div>
+            <div class="form-group">
+              <label for="url">URL del Video:</label>
+              <input type="url" class="form-control" id="url" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" onclick="AgregarVideo()">Agregar Video</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="js/addVideo.js"></script>
+</body>
+
+</html>
