@@ -85,34 +85,49 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   };
 
-  // Función para agregar un video
-  function AgregarVideo() {
+document.addEventListener('DOMContentLoaded', function () {
+    const formAgregarVideo = document.getElementById('formAgregarVideo');
+    formAgregarVideo.addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevenir el envío del formulario
+        AgregarVideo();
+    });
+});
+
+function AgregarVideo() {
     const nombre = document.getElementById('nombre').value;
     const url = document.getElementById('url').value;
+    const descripcion = document.getElementById('descripcion').value;
     const token = localStorage.getItem('token');
 
+    // Validaciones
+    if (!nombre || !url) {
+        alert('Por favor, completa todos los campos requeridos.');
+        return;
+    }
+
     fetch('http://localhost:3000/videos', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}` // Incluir el token de autorización en el encabezado
-      },
-      body: JSON.stringify({ nombre, url })
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}` // Incluir el token de autorización en el encabezado
+        },
+        body: JSON.stringify({ nombre, url, descripcion })
     })
-      .then(response => {
-        if (response.ok) {
-          alert('Video agregado exitosamente');
-          window.location.href = '/addVideo.html';
-        } else {
-          return response.json().then(data => {
-            throw new Error(data.error);
-          });
-        }
-      })
-      .catch(error => {
-        console.error('Error al agregar video:', error);
-        alert('Hubo un error al procesar la solicitud');
-      });
+        .then(response => {
+            if (response.ok) {
+                alert('Video agregado exitosamente');
+                window.location.href = '/playlists.html'; // Redirigir a la lista de playlists
+            } else {
+                return response.json().then(data => {
+                    throw new Error(data.error);
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error al agregar video:', error);
+            alert('Hubo un error al procesar la solicitud');
+        });
+
   }
 
   // Función para eliminar un video
