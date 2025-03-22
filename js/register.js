@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const firstName = formData.get('firstName');
             const lastName = formData.get('lastName');
             const country = formData.get('country');
-            const dateOfBirth = formData.get('dateOfBirth');
+            let dateOfBirth = formData.get('dateOfBirth');
 
             // Validación del PIN
             if (!/^\d{6}$/.test(pin)) {
@@ -21,9 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const today = new Date();
-            const birthDate = new Date(dateOfBirth);
+            let birthDate = new Date(dateOfBirth);
             let age = today.getFullYear() - birthDate.getFullYear();
-            const month = today.getMonth() - birthDate.getMonth();
+            let month = today.getMonth() - birthDate.getMonth();
             if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
                 age--;
             }
