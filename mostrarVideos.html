@@ -97,6 +97,23 @@
             height: 400px;
             border: none;
         }
+        .search-form {
+            max-width: 500px;
+            margin: 0 auto 30px;
+        }
+        .search-form .form-control {
+            border-radius: 20px;
+            border: 2px solid #d43183;
+        }
+        .search-form .btn {
+            border-radius: 20px;
+            background-color: #d43183;
+            color: white;
+            border: none;
+        }
+        .search-form .btn:hover {
+            background-color: #b1276f;
+        }
         @media (max-width: 576px) {
             .video-player {
                 height: 250px;
@@ -105,15 +122,15 @@
     </style>
 </head>
 <body>
-    <img src="https://i.postimg.cc/MGZ0ywPc/DALL-E-2025-03-14-18-07-19-A-playful-and-colorful-logo-for-Kidstube-a-children-s-movie-website.png" alt="Decorative Image" style="position: fixed; top: 0; right: 0; width: 100px; z-index: 1;">
+    <img src="https://i.postimg.cc/MGZ0ywPc/DALL-E-2025-03-14-18-07-19-A-playful-and-colorful-logo-for-Kidstube-a-children-s-movie-website.png" alt="Decorative Image" style="position: fixed; top: 0; left: 0; width: 100px;">
 
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #d43183c6;">
-        <a class="navbar-brand" href="#">Gestión de Videos</a>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">Playlists</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="#" onclick="salir()">Salir</a>
                 </li>
@@ -124,6 +141,15 @@
     <!-- Sección de Playlists -->
     <div class="container mt-5" id="playlistsSection">
         <h2>Playlists Disponibles</h2>
+        <!-- Campo de búsqueda -->
+        <form class="search-form" onsubmit="buscarVideos(event)">
+            <div class="input-group">
+                <input type="text" class="form-control" id="searchInput" placeholder="Buscar videos por nombre o descripción..." required>
+                <div class="input-group-append">
+                    <button class="btn" type="submit">Buscar</button>
+                </div>
+            </div>
+        </form>
         <table class="table">
             <thead>
                 <tr>
@@ -134,6 +160,15 @@
             </thead>
             <tbody id="lista-playlists"></tbody>
         </table>
+    </div>
+
+    <!-- Sección de Resultados de Búsqueda -->
+    <div class="container mt-5" id="searchResultsSection" style="display: none;">
+        <h2>Resultados de la Búsqueda</h2>
+        <div class="row" id="lista-resultados">
+            <!-- Los resultados de búsqueda se cargarán aquí dinámicamente como tarjetas -->
+        </div>
+        <button type="button" class="btn btn-secondary mt-4" onclick="volverAPlaylists()">Volver a Playlists</button>
     </div>
 
     <!-- Sección de Videos (se muestra al seleccionar una playlist) -->
@@ -152,7 +187,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="videoModalLabel">Reproduciendo Video</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">

@@ -87,6 +87,70 @@ const reproducirVideo = (videoId, videoNombre) => {
     }
 };
 
+// Función para buscar videos
+const buscarVideos = async (event) => {
+    event.preventDefault();
+    const searchText = document.getElementById('searchInput').value.trim();
+    if (!searchText) {
+        alert('Por favor, ingresa un texto para buscar.');
+        return;
+    }
+
+    try {
+        const authToken = localStorage.getItem('token');
+        const restrictedUserId = localStorage.getItem('restrictedUserId');
+        const response = await fetch('http://localhost:3000/videos/buscar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${authToken}`
+            },
+            body: JSON.stringify({ restrictedUserId, searchText })
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Error al buscar videos');
+        }
+
+        const videos = await response.json();
+        document.getElementById('playlistsSection').style.display = 'none';
+        document.getElementById('videosSection').style.display = 'none';
+        document.getElementById('searchResultsSection').style.display = 'block';
+
+        const listaResultados = document.getElementById('lista-resultados');
+        if (listaResultados) {
+            listaResultados.innerHTML = '';
+            if (videos.length === 0) {
+                listaResultados.innerHTML = '<p class="text-center">No se encontraron videos que coincidan con tu búsqueda.</p>';
+                return;
+            }
+
+            videos.forEach(video => {
+                const videoId = obtenerVideoId(video.url);
+                const thumbnailUrl = videoId ? `https://img.youtube.com/vi/${videoId}/0.jpg` : 'https://via.placeholder.com/320x180?text=Sin+Miniatura';
+
+                const card = document.createElement('div');
+                card.className = 'col-md-4 col-sm-6 mb-4';
+                card.innerHTML = `
+                    <div class="video-card">
+                        <img src="${thumbnailUrl}" alt="Miniatura de ${video.nombre}">
+                        <div class="video-card-body">
+                            <h5 class="video-card-title">${video.nombre}</h5>
+                            <p class="video-card-text">${video.descripcion || 'Sin descripción'}</p>
+                            <button class="btn video-card-btn" onclick="reproducirVideo('${videoId}', '${video.nombre}')">Reproducir</button>
+                        </div>
+                    </div>
+                `;
+                listaResultados.appendChild(card);
+            });
+        }
+    } catch (error) {
+        console.error('Error al buscar videos:', error);
+        alert('Hubo un error al buscar los videos: ' + error.message);
+    }
+};
+
 // Función para mostrar los videos de una playlist seleccionada
 const mostrarVideos = async (playlistId, playlistNombre) => {
     try {
@@ -104,6 +168,7 @@ const mostrarVideos = async (playlistId, playlistNombre) => {
 
         const videos = await response.json();
         document.getElementById('playlistsSection').style.display = 'none';
+        document.getElementById('searchResultsSection').style.display = 'none';
         document.getElementById('videosSection').style.display = 'block';
         document.getElementById('nombrePlaylistSeleccionada').textContent = playlistNombre;
 
@@ -111,7 +176,6 @@ const mostrarVideos = async (playlistId, playlistNombre) => {
         if (listaVideos) {
             listaVideos.innerHTML = '';
             videos.forEach(video => {
-                // Obtener el ID del video y la URL de la miniatura
                 const videoId = obtenerVideoId(video.url);
                 const thumbnailUrl = videoId ? `https://img.youtube.com/vi/${videoId}/0.jpg` : 'https://via.placeholder.com/320x180?text=Sin+Miniatura';
 
@@ -139,7 +203,9 @@ const mostrarVideos = async (playlistId, playlistNombre) => {
 // Función para volver a la lista de playlists
 const volverAPlaylists = () => {
     document.getElementById('videosSection').style.display = 'none';
+    document.getElementById('searchResultsSection').style.display = 'none';
     document.getElementById('playlistsSection').style.display = 'block';
+    document.getElementById('searchInput').value = ''; // Limpiar el campo de búsqueda
     obtenerPlaylists();
 };
 
