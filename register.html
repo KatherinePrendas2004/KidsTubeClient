@@ -1,71 +1,73 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Usuario</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
-        .card {
-            margin-top: 50px;
-            border-radius: 15px;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/register.css">
 </head>
-
 <body>
+    <img src="https://i.postimg.cc/MGZ0ywPc/DALL-E-2025-03-14-18-07-19-A-playful-and-colorful-logo-for-Kidstube-a-children-s-movie-website.png" alt="Decorative Image" class="logo">
+
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card shadow-sm">
+            <div class="col-md-12">
+                <div class="card">
                     <div class="card-header text-center">
                         <h3>Registro</h3>
                     </div>
                     <div class="card-body">
                         <form id="registerForm">
-                            <div class="form-group">
-                                <label for="username">Correo Electrónico</label>
-                                <input type="email" class="form-control" id="username" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Contraseña</label>
-                                <input type="password" class="form-control" id="password" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="repeatPassword">Repetir Contraseña</label>
-                                <input type="password" class="form-control" id="repeatPassword" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="pin">PIN (6 dígitos)</label>
-                                <input type="password" class="form-control" id="pin" maxlength="6" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="firstName">Nombre</label>
-                                <input type="text" class="form-control" id="firstName" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="lastName">Apellidos</label>
-                                <input type="text" class="form-control" id="lastName" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="country">País</label>
-                                <select class="form-control" id="country" required>
-                                    <option value="">Seleccione un país</option>
-                                    <option>Argentina</option>
-                                    <option>Brasil</option>
-                                    <option>Chile</option>
-                                    <option>Colombia</option>
-                                    <option>España</option>
-                                    <option>México</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="dateOfBirth">Fecha de Nacimiento</label>
-                                <input type="date" class="form-control" id="dateOfBirth" required>
+                            <div class="row row-cols-1 row-cols-md-2">
+                                <!-- Primera Columna -->
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="username">Correo Electrónico</label>
+                                        <input type="email" class="form-control" id="username" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Contraseña</label>
+                                        <input type="password" class="form-control" id="password" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="repeatPassword">Repetir Contraseña</label>
+                                        <input type="password" class="form-control" id="repeatPassword" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pin">PIN (6 dígitos)</label>
+                                        <input type="password" class="form-control" id="pin" maxlength="6" required>
+                                    </div>
+                                </div>
+                                <!-- Segunda Columna -->
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="firstName">Nombre</label>
+                                        <input type="text" class="form-control" id="firstName" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lastName">Apellidos</label>
+                                        <input type="text" class="form-control" id="lastName" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="country">País</label>
+                                        <select class="form-control" id="country" required>
+                                            <option value="">Seleccione un país</option>
+                                            <option>Argentina</option>
+                                            <option>Brasil</option>
+                                            <option>Chile</option>
+                                            <option>Colombia</option>
+                                            <option>Costa Rica</option>
+                                            <option>España</option>
+                                            <option>México</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="dateOfBirth">Fecha de Nacimiento</label>
+                                        <input type="date" class="form-control" id="dateOfBirth" required>
+                                    </div>
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
                         </form>
@@ -75,56 +77,6 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const registerForm = document.getElementById('registerForm');
-
-            registerForm.addEventListener('submit', async (event) => {
-                event.preventDefault();
-                const username = document.getElementById('username').value;
-                const password = document.getElementById('password').value;
-                const repeatPassword = document.getElementById('repeatPassword').value;
-                const pin = document.getElementById('pin').value;
-                const firstName = document.getElementById('firstName').value;
-                const lastName = document.getElementById('lastName').value;
-                const country = document.getElementById('country').value;
-                const dateOfBirth = document.getElementById('dateOfBirth').value;
-
-                // Validaciones
-                if (password !== repeatPassword) {
-                    alert('Las contraseñas no coinciden.');
-                    return;
-                }
-
-                if (!/^\d{6}$/.test(pin)) {
-                    alert('El PIN debe contener exactamente 6 números.');
-                    return;
-                }
-
-                try {
-                    const response = await fetch('http://localhost:3000/auth/register', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ username, password, pin, firstName, lastName, country, dateOfBirth })
-                    });
-
-                    const data = await response.json();
-
-                    if (response.ok) {
-                        alert('Usuario registrado exitosamente.');
-                        window.location.href = '/index.html';
-                    } else {
-                        alert(data.error || 'Error al registrar el usuario.');
-                    }
-                } catch (error) {
-                    console.error('Error en el registro:', error);
-                    alert('Hubo un error al procesar la solicitud.');
-                }
-            });
-        });
-    </script>
+    <script src="./js/register.js"></script>
 </body>
-
 </html>
